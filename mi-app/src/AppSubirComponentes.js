@@ -1,0 +1,44 @@
+//Es de mejor practica manejar los estados desde App, para que
+//la app en general tenga mejor acceso a estos estados
+
+import {Component} from 'react'
+
+class Input extends Component {
+    render() {
+        return(
+            <input
+                value = {this.props.value}
+                onChange={this.props.onChange}
+            />
+        )
+    }
+}
+
+class App extends Component {
+    state={
+        nombre: '',
+        apellido: '',
+    }
+
+    updateValues = (prop,value) => {
+        this.setState({[prop]: value})
+    }
+
+    render(){
+        return(
+            <p>
+                Nombre Completo: {`${this.state.nombre} ${this.state.apellido}`}
+                <Input
+                    value = {this.state.nombre}
+                    onChange = {e => this.updateValues('nombre', e.target.value)} 
+                />
+                <Input
+                    value = {this.state.apellido}
+                    onChange = {e => this.updateValues('apellido', e.target.value)}
+                 />
+            </p>
+        )
+    }
+}
+
+export default App
